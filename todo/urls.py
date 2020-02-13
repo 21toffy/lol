@@ -1,7 +1,8 @@
 from django.urls import path
 
-app_name = 'todo'
+from .views import home
+app_name = 'notes'
 
 urlpatterns = [
-    path('', ),
+    path('<str:username>/', home, name='home' ),
 ]
