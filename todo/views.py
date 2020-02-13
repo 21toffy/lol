@@ -1,10 +1,9 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from .models import Note
 from django.contrib.auth.decorators import login_required
 from .forms import Note_form
 import datetime
-from django.http import HttpResponseRedirect
 from django.contrib import messages 
 from django.urls import reverse
 from django.contrib.auth.models import User
@@ -31,7 +30,7 @@ def home(request, username):
             new_note.owner = current_user
             new_note.date = datetime.datetime.now()
             new_note.save()
-            return HttpResponseRedirect(reverse('notes:home', kwargs={'username':username}))
+            return Redirect('notes:home', kwargs={'username':username})
 
     else:
         form=Note_form()
@@ -47,10 +46,10 @@ def login_view(request):
         if user is not None:
             if user.is_active:
                 login(request,user)
-                return HttpResponseRedirect(reverse('notes:home', kwargs={'username':username}))
+                return Redirect('notes:home', kwargs={'username':username})
             else:
                 
-                return HttpResponseRedirect(reverse('notes:login'))
+                return Redirect('notes:login')
                 messages.error(request, 'this account is not active')
         else:
             messages.error(request, 'Bad username or password')
@@ -67,7 +66,7 @@ def register_view(request):
             email = form.cleaned_data['email']
             user = User.objects.create_user(username, password=password, email=email)
             messages.success(request, 'Thanks for registering {}'.format(user.username))
-            return HttpResponseRedirect(reverse('notes:login'))
+            return Redirect('notes:login')
     else:
         form = UserRegisterForm()
 
@@ -78,5 +77,5 @@ def register_view(request):
 
 def logout_view(request):
     logout(request)
-    return HttpResponseRedirect(reverse('login'))
+    return Redirect('login')
 
