@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>
+            login | user
+        </title>
+    </head>
+</html>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+                <p>dont have an account?  <a href="{% url 'notes:register' %}">register</a> </p>
+            {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                <li {% if message.tags %} class="{{message.tags}}"{% endif %}>{{ message }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+            <form action = "" method="POST">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for='username'>username</label>
+                    <input type='text' class='form-control' name = 'username' placeholder="Enter username">
+                </div>
+
+                <div class="form-group">
+                        <label for='password'>password</label>
+                        <input type='password' class='form-control' name = 'password' placeholder="Enter password">
+                    </div>
+                    <button type="submit" class="btn btn-primary">login</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
