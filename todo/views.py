@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.models import User
 from .models import Note
 from django.contrib.auth.decorators import login_required
@@ -21,9 +21,10 @@ from .forms import UserRegisterForm
 
 @login_required
 def home(request, username):
-    current_user = request.user
-    username=current_user.username
-    note = Note.objects.filter(owner=current_user)
+    current_user = request.user #for the url, in other to pick the current user
+    username=current_user.username #for the url, in other to pick the current users username
+    note = Note.objects.filter(owner=current_user)#to get the notes of only the current user
+    #the add note form
     if request.method == 'POST':
         form = Note_form(request.POST)
         if form.is_valid():
@@ -39,6 +40,8 @@ def home(request, username):
     return render(request,'dashboard.html',context)
 
 
+
+#login logic
 def login_view(request):
     if request.method == "POST":
         username = request.POST.get('username')
@@ -58,6 +61,7 @@ def login_view(request):
     return render (request, 'login.html', {})
 
 
+#register logic
 def register_view(request):
     if request.method=='POST':
         form = UserRegisterForm(request.POST)
@@ -76,7 +80,19 @@ def register_view(request):
 
 
 
+#logout logic
+
 def logout_view(request):
     logout(request)
     return HttpResponseRedirect(reverse('login'))
+
+
+def note_detail(request, id, username):
+    note = get_object_or_404(Note, id=id)
+    current_user = request.user #for the url, in other to pick the current user
+    username=current_user.username #for the url, in other to pick the current users username
+    context = {'note':note, 'username':username}
+    # return HttpResponseRedirect(reverse('note_detail', kwargs={'username':username, 'id':id}))
+    return render(request, 'note_detail.html', context)
+    
 

@@ -1,10 +1,10 @@
 <h1>whats up</h1>
-{{current user.username}}
-{{note.title}}
+{{current_user.username}}
+{% for mynotes in note %}
+<a  href="{% url 'notes:note_detail' username note.id %}">{{ mynotes.title }}</a><br>
+{% endfor %}
 
-{{note.note}}
 
-{{note.date}}
 
 
 
