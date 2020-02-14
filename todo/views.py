@@ -114,11 +114,13 @@ def edit_note(request, pk, slug):
 ##delete note function
 def delete_note(request, slug, pk):
     note = get_object_or_404(Note, pk=pk, slug=slug)
+    current_user = request.user #for the url, in other to pick the current user
+    username=current_user.username #for the url, in other to pick the current users username
     if request.user != note.owner:
         return redirect('notes:login')
     if request.method=='POST':
         note.delete()
         messages.success(request, 'note has been deleted', extra_tags='alert alert-success alert-dismissible fade show')
-        return redirect('notes:home')
+        return redirect('notes:home', username=username)
     return render(request, 'note_confirm_delete.html', {'note':note})
 
