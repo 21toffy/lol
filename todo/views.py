@@ -96,11 +96,11 @@ def note_detail(request, slug, pk):
     # return HttpResponseRedirect(reverse('note_detail', kwargs={'username':username, 'id':id}))
     return render(request, 'note_detail.html', context)
     
-
+#edit  Note  function
 def edit_note(request, pk, slug):
     note = get_object_or_404(Note, pk=pk, slug=slug)
     if request.user != note.owner:
-        return redirect('notes:home')
+        return redirect('notes:login')
 
     if request.method=="POST":
         form =edit_note_form(request.POST, instance=note)
@@ -110,3 +110,15 @@ def edit_note(request, pk, slug):
     else:
         form = edit_note_form(instance=note)
     return render(request, 'edit_note.html', {'note':note, 'form':form})
+
+##delete note function
+def delete_note(request, slug, pk):
+    note = get_object_or_404(Note, pk=pk, slug=slug)
+    if request.user != note.owner:
+        return redirect('notes:login')
+    if request.method=='POST':
+        note.delete()
+        messages.success(request, 'note has been deleted', extra_tags='alert alert-success alert-dismissible fade show')
+        return redirect('notes:home')
+    return render(request, 'note_confirm_delete.html', {'note':note})
+

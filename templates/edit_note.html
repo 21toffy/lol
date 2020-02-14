@@ -19,4 +19,8 @@ you are tring to edit your note
     </div>
     {% endfor %}
     <input type="submit" class="bt btn-primary" value="submit"/>
+    <a href="{% url 'notes:note_confirm_delete' note.slug note.pk %}"
+    type='button'
+    class="btn btn-dander">delete
+    </a>
 </form>
