@@ -1,7 +1,10 @@
 <h1>whats up</h1>
 {{current_user.username}}
 {% for mynotes in note %}
-<a  href="{% url 'notes:note_detail' username note.id %}">{{ mynotes.title }}</a><br>
+<a  href="{% url 'notes:note_detail' mynotes.slug mynotes.pk %}">{{ mynotes.title }}</a><br>
+
+
+<a  href="{% url 'notes:edit_note' mynotes.slug mynotes.pk %}">edit {{ mynotes.title }}</a><br>
 {% endfor %}
 
 

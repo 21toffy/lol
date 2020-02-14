@@ -49,3 +49,9 @@ class UserRegisterForm(forms.Form):
         if email_qs.exists():
             raise ValidationError('This email has already been regitered')
         return email
+
+
+class edit_note_form(forms.ModelForm):
+    class Meta:
+        model = Note
+        fields = ['title','note']

@@ -1,8 +1,8 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404,redirect
 from django.contrib.auth.models import User
 from .models import Note
 from django.contrib.auth.decorators import login_required
-from .forms import Note_form
+from .forms import Note_form, edit_note_form
 import datetime
 from django.http import HttpResponseRedirect
 from django.contrib import messages 
@@ -87,8 +87,9 @@ def logout_view(request):
     return HttpResponseRedirect(reverse('login'))
 
 
-def note_detail(request, id, username):
-    note = get_object_or_404(Note, id=id)
+@login_required
+def note_detail(request, slug, pk):
+    note = get_object_or_404(Note, pk=pk, slug=slug)
     current_user = request.user #for the url, in other to pick the current user
     username=current_user.username #for the url, in other to pick the current users username
     context = {'note':note, 'username':username}
@@ -96,3 +97,16 @@ def note_detail(request, id, username):
     return render(request, 'note_detail.html', context)
     
 
+def edit_note(request, pk, slug):
+    note = get_object_or_404(Note, pk=pk, slug=slug)
+    if request.user != note.owner:
+        return redirect('notes:home')
+
+    if request.method=="POST":
+        form =edit_note_form(request.POST, instance=note)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'note edited succesfully')
+    else:
+        form = edit_note_form(instance=note)
+    return render(request, 'edit_note.html', {'note':note, 'form':form})

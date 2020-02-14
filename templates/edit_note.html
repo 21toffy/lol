@@ -1,0 +1,22 @@
+you are tring to edit your note
+
+<h1>note title</h1>
+{{note.title}}
+<br>
+<h1>note kept</h1>
+{{note.note}}
+<br>
+<br>
+<br>
+
+<form method="POST">
+    {% csrf_token %}
+    {% for field in form %}
+    <div class="form-group">
+        {{ field.error }}
+        {{ field.label_tag }}
+        {{ field }}
+    </div>
+    {% endfor %}
+    <input type="submit" class="bt btn-primary" value="submit"/>
+</form>
