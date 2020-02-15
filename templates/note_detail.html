@@ -1,6 +1,29 @@
 
+{% extends 'base.html' %}
 
-{{note.title}}<br>
-{{note.note}}
+{% block title %}login | user{% endblock %}
+
+{% load staticfiles %}
+        
+
+
+{% block body %}
+<body class="bg-light"></body>
+    </body>
+<div class="container">
+    <div class="jumbotron p-3 p-md-5 text-white rounded bg-dark">
+            <div class="col-md-6 px-0">
+              <h1 class="display-4 font-italic">{{note.title}}
+            <small><p class="lead mb-0"><a href="#" class="text-white ">
+                {{note.note}}</a></p></small>
+
+            </div><br>
+            <small><p>{{note.date}}</p></small>
+          </div>
+          
+        </div>
+    
+          </div>
+{% endblock body%}
 
 
