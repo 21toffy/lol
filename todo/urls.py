@@ -8,7 +8,7 @@ urlpatterns = [
     #home page and dashboard
     path('<str:username>/', home, name='home' ),
     path('accounts/login/', login_view, name='login'),
-    path('logout/', logout_view),
+    path('accounts/logout/', logout_view, name='logout'),
     path('accounts/register/', register_view, name='register'),
     path('<slug:slug>/<int:pk>/', note_detail, name='note_detail'),
     path('edit/note/<slug:slug>/<int:pk>', edit_note, name='edit_note'),

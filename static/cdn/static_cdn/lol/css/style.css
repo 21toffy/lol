@@ -1,7 +1,4 @@
-
-img {
-	max-width: 100%;
-}
-`.body{
-    background-color:black;
-}
+.navbar {
+     padding-top: 0.25rem; 
+     padding-bottom: 0.25rem; 
+    }

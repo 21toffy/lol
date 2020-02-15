@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% block title %}login | user{% endblock %}
+{% block title %}{{request.user}} | noteoard{% endblock %}
 
 {% load staticfiles %}
         
@@ -11,8 +11,8 @@
 
         <div class="container">
           <div class="py-5 text-center">
-            <img class="d-block mx-auto mb-4" src=" " alt="" width="72" height="72">
-            <h2>{{current_user.username}}</h2>
+            <!-- <img class="d-block mx-auto mb-4" src=" " alt="" width="72" height="72"> -->
+            <h5>{{current_user.username}}'s noteboard</h5>
             <p class="lead">Welcome to your dashboard, Remember to always jott a Note before leaving... it helps !!!</p>
           </div>
     
