@@ -4,6 +4,8 @@ from .views import home, login_view, register_view, logout_view, note_detail, ed
 app_name = 'notes'
 
 urlpatterns = [
+
+    #home page and dashboard
     path('<str:username>/', home, name='home' ),
     path('accounts/login/', login_view, name='login'),
     path('logout/', logout_view),

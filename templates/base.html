@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+
+        {% load staticfiles %}
+        <link rel="stylesheet" href="{% static 'cdn/static_cdn/lol/css/bootstrap.min.css' %}"/>
+        <link rel="stylesheet" href="{% static 'cdn/static_cdn/lol/css/font-awesome.min.css' %}"/>
+        <link rel="stylesheet" href="{% static 'cdn/static_cdn/lol/css/base.css' %}"/>
+        <meta charset="utf-8">
+
+        <title>
+            {% block title %} lol {% endblock %}
+        </title>
+
+    </head>
+
+<body>
+    {% block body %}
+      
+    {% endblock body %}
+
+
+
+</body>
+<script src="{% static 'cdn/static_cdn/lol/js/jquery-3.2.1.min.js' %}"></script>
+<script src="{% static 'cdn/static_cdn/lol/js/bootstrap.min.js' %}"></script>
+<script src="{% static 'cdn/static_cdn/lol/js/main.js' %}"></script>
+</html>

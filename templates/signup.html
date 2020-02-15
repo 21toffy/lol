@@ -1,17 +1,20 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <title>
-            Register | user
-        </title>
-    </head>
-</html>
-<body>
+{% extends 'base.html' %}
+
+{% block title %} Register|user {% endblock %}
+
+{% load staticfiles %}
+        
+
+
+
+{% block body %}
+            
+        
     <div class="container">
         <div class="row">
             <div class="col-sm-6 offset-sm-3">
                     <h1>Register</h1>
-                    <p>already have an account?  <a href="{% url 'notes:login' %}">login</a> </p>
+                    
                     
                         <form method="POST">
                             {% csrf_token %}
@@ -22,10 +25,11 @@
                                 {{ field }}
                             </div>
                             {% endfor %}
-                            <input type="submit" class="bt btn-primary" value="submit"/>
+                            <input type="submit" class="btn btn-primary" value="submit"/>
                         </form>
+                        <p>already have an account?  <a href="{% url 'notes:login' %}">login</a> </p>
             </div>
         </div>
     </div>
-    
-</body>
+      
+{% endblock body %}
