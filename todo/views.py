@@ -18,6 +18,14 @@ from django.contrib.auth import(
 
 from .forms import UserRegisterForm
 
+def base_view(request):
+    current_user = request.user #for the url, in other to pick the current user
+    username=current_user.username #for the url, in other to pick the current users username
+    note = Note.objects.filter(owner=current_user)#to get the notes of only the current user
+    context = {'current_user':current_user, 'note':note, 'username':username}    
+    return render(request,'base.html',context)
+
+
 
 @login_required
 def home(request, username):
@@ -74,6 +82,7 @@ def register_view(request):
             return HttpResponseRedirect(reverse('notes:login'))
     else:
         form = UserRegisterForm()
+        messages.error(request, 'passwords dont match')
 
     return render(request, 'signup.html', {'form':form})
 

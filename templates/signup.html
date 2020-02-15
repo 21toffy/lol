@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% block title %} Register|user {% endblock %}
+{% block title %} Register|{% endblock %}
 
 {% load staticfiles %}
         
@@ -11,11 +11,20 @@
 <body class="bg-light">
     <div class="container">
         <div class="row">
+                {% if messages %}
+                <ul class="messages">
+                    {% for message in messages %}
+                    <li {% if message.tags %} class="{{message.tags}}"{% endif %}>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
             <div class="col-sm-6 offset-sm-3">
+                
                     <h1>Register</h1>
-                    
+
                     
                         <form method="POST">
+                            
                             {% csrf_token %}
                             {% for field in form %}
                             <div class="form-group">
