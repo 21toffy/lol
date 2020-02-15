@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load crispy_forms_tags %}
 
 {% block title %} Register|{% endblock %}
 
@@ -11,16 +12,18 @@
 <body class="bg-light">
     <div class="container">
         <div class="row">
-                {% if messages %}
-                <ul class="messages">
-                    {% for message in messages %}
-                    <li {% if message.tags %} class="{{message.tags}}"{% endif %}>{{ message }}</li>
-                    {% endfor %}
-                </ul>
-            {% endif %}
+                
             <div class="col-sm-6 offset-sm-3">
                 
+                
                     <h1>Register</h1>
+                    {% if messages %}
+                        <ul class="messages">
+                            {% for message in messages %}
+                            <li {% if message.tags %} class="{{message.tags}}"{% endif %}>{{ message }}</li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
 
                     
                         <form method="POST">
@@ -41,3 +44,6 @@
     </div>
 </body>
 {% endblock body %}
+
+
+

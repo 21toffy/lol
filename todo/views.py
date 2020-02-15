@@ -82,7 +82,6 @@ def register_view(request):
             return HttpResponseRedirect(reverse('notes:login'))
     else:
         form = UserRegisterForm()
-        messages.error(request, 'passwords dont match')
 
     return render(request, 'signup.html', {'form':form})
 
