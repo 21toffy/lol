@@ -1,11 +1,12 @@
 from django.urls import path
 
-from .views import home, login_view, register_view, logout_view, note_detail, edit_note, delete_note
+from .views import home, login_view, register_view, logout_view, note_detail, edit_note, delete_note, LandingView
 app_name = 'notes'
 
 urlpatterns = [
 
     #home page and dashboard
+    path('', LandingView.as_view() , name='landing' ),
     path('<str:username>/', home, name='home' ),
     path('accounts/login/', login_view, name='login'),
     path('accounts/logout/', logout_view, name='logout'),
