@@ -2,8 +2,8 @@
 
 {% block title %}{{request.user}} | noteboard{% endblock %}
 
-{% load staticfiles %}
-        
+{% load static %}
+
 
 
 {% block body %}
@@ -15,12 +15,12 @@
             <h5>{{current_user.username}}'s noteboard</h5>
             <p class="lead">Welcome to your dashboard, Remember to always jott a Note before leaving... it helps !!!</p>
           </div>
-    
+
           <div class="row">
             <div class="col-md-4 order-md-2 mb-4">
               <h4 class="d-flex justify-content-between align-items-center mb-3">
                 <span class="text-muted">Your Notes</span>
-                
+
                 <span class="badge badge-secondary badge-pill">{{note.count}}</span>
               </h4>
               {% for mynotes in note %}
@@ -31,13 +31,13 @@
                     <small class="text-muted">{{ mynotes.note|slice:":50" }}...<a href="{% url 'notes:edit_note' mynotes.slug mynotes.pk %}">read more</a></small><br>
                     <small>{{ mynotes.date }}</small>
                   </div>
-                  
+
                 </li>
-                
+
               </ul>
               {% endfor %}
-    
-              
+
+
             </div>
 
 
@@ -53,14 +53,14 @@
                         {{ field.error }}
                         {{ field.label_tag }}
                         {{ field }}
-                        
+
                     </div>
                     {% endfor %}
                 <button class="btn btn-primary btn-lg btn-block" type="submit">Save Note</button>
               </form>
             </div>
           </div>
-    
+
           <footer class="my-5 pt-5 text-muted text-center text-small">
             <p class="mb-1">© 2020-2021 lol</p>
             <ul class="list-inline">
@@ -75,11 +75,11 @@
           // Example starter JavaScript for disabling form submissions if there are invalid fields
           (function() {
             'use strict';
-    
+
             window.addEventListener('load', function() {
               // Fetch all the forms we want to apply custom Bootstrap validation styles to
               var forms = document.getElementsByClassName('needs-validation');
-    
+
               // Loop over them and prevent submission
               var validation = Array.prototype.filter.call(forms, function(form) {
                 form.addEventListener('submit', function(event) {
@@ -93,8 +93,8 @@
             }, false);
           })();
         </script>
-      
-    
+
+
     </body>
 
 

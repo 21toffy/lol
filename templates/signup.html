@@ -3,8 +3,8 @@
 
 {% block title %} Register|{% endblock %}
 
-{% load staticfiles %}
-        
+{% load static %}
+
 
 
 
@@ -12,10 +12,10 @@
 <body class="bg-light">
     <div class="container">
         <div class="row">
-                
+
             <div class="col-sm-6 offset-sm-3">
-                
-                
+
+
                     <h1>Register</h1>
                     {% if messages %}
                         <ul class="messages">
@@ -25,9 +25,9 @@
                         </ul>
                     {% endif %}
 
-                    
+
                         <form method="POST">
-                            
+
                             {% csrf_token %}
                             {% for field in form %}
                             <div class="form-group">
