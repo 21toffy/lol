@@ -5,7 +5,7 @@ from django.contrib.auth.decorators import login_required
 from .forms import Note_form, edit_note_form
 import datetime
 from django.http import HttpResponseRedirect
-from django.contrib import messages 
+from django.contrib import messages
 from django.urls import reverse
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
@@ -15,14 +15,25 @@ from django.contrib.auth import(
     login,
     logout
 )
+from django.views import View
 
 from .forms import UserRegisterForm
+
+
+
+class LandingView(View):
+    def get(self,request):
+        # this displays the landing page
+        template_name  = 'landing/landing.html'
+        context = {}
+        return render(request,template_name,context)
+
 
 def base_view(request):
     current_user = request.user #for the url, in other to pick the current user
     username=current_user.username #for the url, in other to pick the current users username
     note = Note.objects.filter(owner=current_user)#to get the notes of only the current user
-    context = {'current_user':current_user, 'note':note, 'username':username}    
+    context = {'current_user':current_user, 'note':note, 'username':username}
     return render(request,'base.html',context)
 
 
@@ -44,7 +55,7 @@ def home(request, username):
 
     else:
         form=Note_form()
-    context = {'current_user':current_user, 'note':note, 'form':form}    
+    context = {'current_user':current_user, 'note':note, 'form':form}
     return render(request,'dashboard.html',context)
 
 
@@ -60,7 +71,7 @@ def login_view(request):
                 login(request,user)
                 return HttpResponseRedirect(reverse('notes:home', kwargs={'username':username}))
             else:
-                
+
                 return HttpResponseRedirect(reverse('notes:login'))
                 messages.error(request, 'this account is not active')
         else:
@@ -103,7 +114,7 @@ def note_detail(request, slug, pk):
     context = {'note':note, 'username':username}
     # return HttpResponseRedirect(reverse('note_detail', kwargs={'username':username, 'id':id}))
     return render(request, 'note_detail.html', context)
-    
+
 #edit  Note  function
 def edit_note(request, pk, slug):
     note = get_object_or_404(Note, pk=pk, slug=slug)

@@ -2,8 +2,8 @@
 
 {% block title %}login|{% endblock %}
 
-{% load staticfiles %}
-        
+{% load static %}
+
 
 
 
@@ -15,12 +15,12 @@
 
 <div class="container login">
             <div class="col-sm-4 offset-md-4">
- 
+
 
                 <div class="text-center mb-4">
-                    
+
                     <h1 class="h3 mb-3 font-weight-normal">Login</h1>
-                    
+
                     </div>
                 {% if messages %}
                 <ul class="messages">
@@ -35,7 +35,7 @@
                         <label for='username'>username</label>
                         <input type='text' class='form-control' name = 'username' placeholder="Enter username">
                     </div>
-    
+
                     <div class="form-group">
                             <label for='password'>password</label>
                             <input type='password' class='form-control' name = 'password' placeholder="Enter password">
@@ -50,10 +50,10 @@
                 </form>
                 <p>dont have an account?  <a href="{% url 'notes:register' %}">register</a> </p>
             </div>
-    </div>      
+    </div>
 </body>
 {% endblock body %}
-        
+
 
 
 
