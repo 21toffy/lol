@@ -1,13 +1,14 @@
 {% extends 'base.html' %}
+
 {% load crispy_forms_tags %}
 
 {% block title %} Alsaheem-Toffy{% endblock %}
 
-{% load static %}
+{% load staticfiles %}
 
 
 
-{% block body %}      
+{% block body %} 
         <!-- Fonts -->
  
     </head>
@@ -49,31 +50,7 @@
          border-bottom-color: #007bff;
         }
       </style>
-    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark nav-masthead">
-    <div class="container">
-      <a class="navbar-brand" href="#"> <h3 class="masthead-brand mb-0"><i class="fas fa-fire-alt"></i></h3></a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarCollapse">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item">
-            <a class="nav-link p-2 font-weight-bold text-white" href="">Home </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link p-2 font-weight-bold text-white" href="#">Products</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link font-weight-bold p-2 text-white" href="#">About</a>
-          </li>
-        </ul>
 
-       <a class="nav-link text-white p-2 font-weight-bold" href="{% url 'notes:login' %}">Login</a>
-        <a class="nav-link text-white p-2 font-weight-bold" href="{% url 'notes:register' %}">Register</a>
-
-      </div>
-      </div>
-    </nav>
 <!-- nav bar ends -->
 
   <div class="jumbotron jumbotron-odi-hero bg-primary">
@@ -98,7 +75,20 @@
                  <div class="media-body">
                    <h4 class="mt-0 tex-dark">NotesCard</h4>
                    <p class=" text-secondary">You can create personalized notes in a really really short time :)</p>
-                  <button class="btn btn-primary">Go to Notes</button>
+                   
+                   {% if request.user.is_authenticated %}
+                   <a href="{% url 'notes:home' request.user.username %}" class="btn btn-primary">Go to notes</a>
+                   {% else %}
+                                     
+                    <a href="{% url 'notes:login' %}" class="btn btn-primary">Go to notes</a>
+                  
+                   {% endif %}
+                     
+                   
+                   
+              
+                     
+                   
                  </div>
                </div>
              </div>
@@ -136,7 +126,7 @@
                    <div class="col-md-3">
                     <div class="card shadow">
                       <div class="card-body">
-                      <div class="py-3 text-center"> <i class="fas fa-rocket card-img-top fa-4x text-primary" aria-hidden="true"></i></div>
+                      <div class="py-3 text-center"> <i class="fa fa-rocket card-img-top fa-4x text-primary" aria-hidden="true"></i></div>
                       <div class="card-body">
                         <h4 class="card-title">Ready to ship</h4>
                         <p class="card-text">You can use this theme as personal as well as for commercial purpose & can customise it. </p>
@@ -147,7 +137,9 @@
                       <div class="col-md-3">
                      <div class="card shadow">
                       <div class="card-body">
-                       <div class="py-3 text-center"><i class="fas fa-feather card-img-top fa-4x text-primary" aria-hidden="true"></i></div>
+                       <div class="py-3 text-center">
+                          <i class="fa fa-leaf card-img-top fa-4x text-primary" aria-hidden="true"></i> 
+                        </div>
                       <div class="card-body">
                         <h4 class="card-title">Light weight</h4>
                         <p class="card-text">We avoid needless js and CSS which makes template more sleek and powerful. </p>
@@ -172,7 +164,9 @@
                     <div class="col-md-3">
                      <div class="card shadow">
                       <div class="card-body">
-                      <div class="py-3 text-center"><i class="fas fa-charging-station card-img-top fa-4x text-primary" aria-hidden="true"></i>
+                      <div class="py-3 text-center">
+                          <i class="fa fa-bolt card-img-top fa-4x text-primary" aria-hidden="true"></i>
+                         
                      </div>
                       <div class="card-body">
                         <h4 class="card-title">Easy customisation</h4>
@@ -186,6 +180,7 @@
                   </div>
                 </div>
               <div class="container mt-5  text-center">
+                  <i class="fa fa-feather card-img-top fa-4x text-primary" aria-hidden="true"></i>
                  <p class="pt-5 pb-2 h4 text-monospace">Speed up your development with high quality themes.</p>
                 <div class="row">
 
