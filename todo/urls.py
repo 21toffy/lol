@@ -14,4 +14,7 @@ urlpatterns = [
     path('<slug:slug>/<int:pk>/', note_detail, name='note_detail'),
     path('edit/note/<slug:slug>/<int:pk>', edit_note, name='edit_note'),
     path('delete/note/<slug:slug>/<int:pk>', delete_note, name='note_confirm_delete'),
+
+
+    
 ]

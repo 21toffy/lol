@@ -1,25 +1,15 @@
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<!------ Include the above in your HEAD tag ---------->
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %} Alsaheem-Toffy{% endblock %}
+
+{% load static %}
 
 
-<!doctype html>
-<html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Alsaheem-Toffy</title>
-
+{% block body %}      
         <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
-
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.css" rel="stylesheet" type="text/css">
-
-        <script async defer src="https://buttons.github.io/buttons.js"></script>
-
+ 
     </head>
     <body>
       <!-- navbar starts -->
@@ -68,7 +58,7 @@
       <div class="collapse navbar-collapse" id="navbarCollapse">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item">
-            <a class="nav-link p-2 font-weight-bold text-white" href="#">Home </a>
+            <a class="nav-link p-2 font-weight-bold text-white" href="">Home </a>
           </li>
           <li class="nav-item">
             <a class="nav-link p-2 font-weight-bold text-white" href="#">Products</a>
@@ -78,8 +68,8 @@
           </li>
         </ul>
 
-       <a class="nav-link text-white p-2 font-weight-bold" href="#">Login</a>
-        <a class="nav-link text-white p-2 font-weight-bold" href="#">Register</a>
+       <a class="nav-link text-white p-2 font-weight-bold" href="{% url 'notes:login' %}">Login</a>
+        <a class="nav-link text-white p-2 font-weight-bold" href="{% url 'notes:register' %}">Register</a>
 
       </div>
       </div>
@@ -346,6 +336,7 @@
                 <!--end of container-->
             </footer>
 <!-- footer end -->
+{% endblock body %}
 
     </body>
 </html>
