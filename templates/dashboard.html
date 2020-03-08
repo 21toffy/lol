@@ -45,12 +45,28 @@
 
 
             <div class="col-md-8 order-md-1">
+              
+              {% if messages %}             
+              <ul class="messages">
+                
+                  {% for message in messages %}
+                  <div class="alert {{ message.tags }} alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                    {{ message }}
+                  </div>
+                {% endfor %}
+                  
+                
+              </ul>
+              {% endif %}
               <h4 class="mb-3">Write Note</h4>
               <form method="POST">
                     {% csrf_token %}
                     {% for field in form %}
                     <div class="form-group">
-                        {{ field.error }}
+                        {{ field.errors }}
                         {{ field.label_tag }}
                         {{ field }}
 

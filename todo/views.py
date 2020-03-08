@@ -29,12 +29,7 @@ class LandingView(View):
         return render(request,template_name,context)
 
 
-def base_view(request):
-    current_user = request.user #for the url, in other to pick the current user
-    username=current_user.username #for the url, in other to pick the current users username
-    note = Note.objects.filter(owner=current_user)#to get the notes of only the current user
-    context = {'current_user':current_user, 'note':note, 'username':username}
-    return render(request,'base.html',context)
+
 
 
 
@@ -51,6 +46,7 @@ def home(request, username):
             new_note.owner = current_user
             new_note.date = datetime.datetime.now()
             new_note.save()
+            messages.success(request, '{} added'.format(new_note.title))
             return HttpResponseRedirect(reverse('notes:home', kwargs={'username':username}))
 
     else:
