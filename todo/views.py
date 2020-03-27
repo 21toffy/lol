@@ -39,7 +39,7 @@ def base_view(request):
 
 
 @login_required
-def home(request, username):
+def home(request):
     current_user = request.user #for the url, in other to pick the current user
     username=current_user.username #for the url, in other to pick the current users username
     note = Note.objects.filter(owner=current_user)#to get the notes of only the current user
@@ -51,7 +51,7 @@ def home(request, username):
             new_note.owner = current_user
             new_note.date = datetime.datetime.now()
             new_note.save()
-            return HttpResponseRedirect(reverse('notes:home', kwargs={'username':username}))
+            return HttpResponseRedirect(reverse('notes:home'))
 
     else:
         form=Note_form()
@@ -69,7 +69,7 @@ def login_view(request):
         if user is not None:
             if user.is_active:
                 login(request,user)
-                return HttpResponseRedirect(reverse('notes:home', kwargs={'username':username}))
+                return HttpResponseRedirect(reverse('notes:home'))
             else:
 
                 return HttpResponseRedirect(reverse('notes:login'))
