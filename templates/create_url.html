@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+
+{% block title %}login|{% endblock %}
+
+{% load static %}
+
+
+
+
+{% block body %}
+
+
+
+<body class="bg-light">
+
+<div class="container login">
+            <div class="col-sm-4 offset-md-4">
+
+
+                    <div class="row">
+                    <h1 class="h3 mb-3 font-weight-normal">Shorten Your url</h1>
+
+                      {% if messages %}
+                      <ul class="messages">
+                          {% for message in messages %}
+                          <div class="alert alert-success" role="alert">
+                            <li {% if message.tags %} class="{{message.tags}}"{% endif %}>{{ message }}</li>
+                          </div>
+                          {% endfor %}
+
+                      </ul>
+                      {% endif %}
+                      <div class="">
+
+                        <form method="POST">
+                              {% csrf_token %}
+                              {% for field in form %}
+                              <div class="form-group">
+                                  {{ field.error }}
+                                  {{ field.label_tag }}
+                                  <div class="form-control">
+                                    {{ field }}
+                                  </div>
+                              </div>
+                              {% endfor %}
+                          <button class="btn btn-primary btn-lg btn-block" type="submit">Save Note</button>
+                        </form>
+                      </div>
+                    </div>
+            </div>
+    </div>
+</body>
+{% endblock body %}
+
+
+
+
+
+
+
+
+
+
+
+
