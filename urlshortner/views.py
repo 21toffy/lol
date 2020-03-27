@@ -21,7 +21,7 @@ class CreateShortenedLink(View):
         niickname = form.cleaned_data['niickname']
         url = form.cleaned_data['url']
         link = Link.objects.create(niickname=niickname, url=url)
-        messages.success(request, 'Your url has been shortened and can be accessed via  http://127.0.0.1:8000/{}'.format(link.attach))
+        messages.success(request, 'Your url has been shortened and can be accessed via this link  http://127.0.0.1:8000/{}'.format(link.attach))
         return redirect('urlshortner:shortner')
 
 
