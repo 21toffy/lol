@@ -1,6 +1,9 @@
 from django.urls import path
-
+from . import views
 from .views import home, login_view, register_view, logout_view, note_detail, edit_note, delete_note, LandingView
+from django.conf import settings
+from django.conf.urls.static import static
+
 
 app_name = 'notes'
 
@@ -16,4 +19,9 @@ urlpatterns = [
     path('edit/note/<slug:slug>/<int:pk>', edit_note, name='edit_note'),
     path('delete/note/<slug:slug>/<int:pk>', delete_note, name='note_confirm_delete'),
 
+
+    
 ]
+if settings.DEBUG:
+    # urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

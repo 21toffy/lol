@@ -4,7 +4,7 @@
 
 {% load static %}
 
-
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 {% block body %}
 <body class="bg-light">
@@ -27,7 +27,7 @@
               <ul class="list-group mb-3">
                 <li class="list-group-item d-flex justify-content-between lh-condensed">
                   <div>
-                    <h6 class="my-0"><a  href="{% url 'notes:note_detail' mynotes.slug mynotes.pk %}">{{ mynotes.title }}</a></h6>
+                    <h6 class="my-0">{{ mynotes.title }}</h6>
                     <small class="text-muted">{{ mynotes.note|slice:":50" }}...<a href="{% url 'notes:edit_note' mynotes.slug mynotes.pk %}">read more</a></small><br>
                     <small>{{ mynotes.date }}</small>
                   </div>
@@ -41,12 +41,28 @@
             </div>
 
             <div class="col-md-8 order-md-1">
+              
+              {% if messages %}             
+              <ul class="messages">
+                
+                  {% for message in messages %}
+                  <div class="alert {{ message.tags }} alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                    {{ message }}
+                  </div>
+                {% endfor %}
+                  
+                
+              </ul>
+              {% endif %}
               <h4 class="mb-3">Write Note</h4>
               <form method="POST">
                     {% csrf_token %}
                     {% for field in form %}
                     <div class="form-group">
-                        {{ field.error }}
+                        {{ field.errors }}
                         {{ field.label_tag }}
                         {{ field }}
 
