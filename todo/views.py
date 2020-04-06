@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404,redirect
-from django.contrib.auth.models import User
+# from django.contrib.auth.models import User
 from .models import Note
 from django.contrib.auth.decorators import login_required
 from .forms import Note_form, edit_note_form
@@ -7,26 +7,14 @@ import datetime
 from django.http import HttpResponseRedirect
 from django.contrib import messages
 from django.urls import reverse
-from django.contrib.auth.models import User
-from django.core.exceptions import ValidationError
-from django.contrib.auth import(
-    authenticate,
-    get_user_model,
-    login,
-    logout
-)
-from django.views import View
-
-from .forms import UserRegisterForm
-
-
-
-class LandingView(View):
-    def get(self,request):
-        # this displays the landing page
-        template_name  = 'landing/landing.html'
-        context = {}
-        return render(request,template_name,context)
+# from django.contrib.auth.models import User
+# from django.core.exceptions import ValidationError
+# from django.contrib.auth import(
+#     authenticate,
+#     get_user_model,
+#     login,
+#     logout
+# )
 
 
 def base_view(request):
@@ -58,54 +46,6 @@ def home(request):
     context = {'current_user':current_user, 'note':note, 'form':form}
     return render(request,'dashboard.html',context)
 
-
-
-#login logic
-def login_view(request):
-    if request.method == "POST":
-        username = request.POST.get('username')
-        password = request.POST.get('password')
-        user = authenticate(request, username=username, password=password)
-        if user is not None:
-            if user.is_active:
-                login(request,user)
-                return HttpResponseRedirect(reverse('notes:home'))
-            else:
-
-                return HttpResponseRedirect(reverse('notes:login'))
-                messages.error(request, 'this account is not active')
-        else:
-            messages.error(request, 'Bad username or password')
-
-    return render (request, 'login.html', {})
-
-
-#register logic
-def register_view(request):
-    if request.method=='POST':
-        form = UserRegisterForm(request.POST)
-        if form.is_valid():
-            username = form.cleaned_data['username']
-            password = form.cleaned_data['password']
-            email = form.cleaned_data['email']
-            user = User.objects.create_user(username, password=password, email=email)
-            messages.success(request, 'Thanks for registering {}'.format(user.username))
-            return HttpResponseRedirect(reverse('notes:login'))
-    else:
-        form = UserRegisterForm()
-
-    return render(request, 'signup.html', {'form':form})
-
-
-
-
-#logout logic
-
-def logout_view(request):
-    logout(request)
-    return HttpResponseRedirect(reverse('notes:login'))
-
-
 @login_required
 def note_detail(request, slug, pk):
     note = get_object_or_404(Note, pk=pk, slug=slug)
@@ -119,7 +59,7 @@ def note_detail(request, slug, pk):
 def edit_note(request, pk, slug):
     note = get_object_or_404(Note, pk=pk, slug=slug)
     if request.user != note.owner:
-        return redirect('notes:login')
+        return redirect('login')
 
     if request.method=="POST":
         form =edit_note_form(request.POST, instance=note)
@@ -136,10 +76,10 @@ def delete_note(request, slug, pk):
     current_user = request.user #for the url, in other to pick the current user
     username=current_user.username #for the url, in other to pick the current users username
     if request.user != note.owner:
-        return redirect('notes:login')
+        return redirect('login')
     if request.method=='POST':
         note.delete()
         messages.success(request, 'note has been deleted', extra_tags='alert alert-success alert-dismissible fade show')
-        return redirect('notes:home', username=username)
+        return redirect('notes:home')
     return render(request, 'note_confirm_delete.html', {'note':note})
 
