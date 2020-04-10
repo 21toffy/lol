@@ -1,24 +1,15 @@
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<!------ Include the above in your HEAD tag ---------->
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block title %} Alsaheem-Toffy{% endblock %}
+
+{% load static %}
 
 
-<!doctype html>
-<html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Alsaheem-Toffy</title>
-
+{% block body %}
         <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
-
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.css" rel="stylesheet" type="text/css">
-
-        <script async defer src="https://buttons.github.io/buttons.js"></script>
 
     </head>
     <body>
@@ -59,31 +50,7 @@
          border-bottom-color: #007bff;
         }
       </style>
-    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark nav-masthead">
-    <div class="container">
-      <a class="navbar-brand" href="#"> <h3 class="masthead-brand mb-0"><i class="fas fa-fire-alt"></i></h3></a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarCollapse">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item">
-            <a class="nav-link p-2 font-weight-bold text-white" href="#">Home </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link p-2 font-weight-bold text-white" href="#">Products</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link font-weight-bold p-2 text-white" href="#">About</a>
-          </li>
-        </ul>
 
-       <a class="nav-link text-white p-2 font-weight-bold" href="#">Login</a>
-        <a class="nav-link text-white p-2 font-weight-bold" href="#">Register</a>
-
-      </div>
-      </div>
-    </nav>
 <!-- nav bar ends -->
 
   <div class="jumbotron jumbotron-odi-hero bg-primary">
@@ -108,7 +75,20 @@
                  <div class="media-body">
                    <h4 class="mt-0 tex-dark">NotesCard</h4>
                    <p class=" text-secondary">You can create personalized notes in a really really short time :)</p>
-                 <a class="btn btn-primary" href="{% url 'notes:home' %}">Go to Notes</a>
+
+                   {% if request.user.is_authenticated %}
+                   <a href="{% url 'notes:home' request.user.username %}" class="btn btn-primary">Go to notes</a>
+                   {% else %}
+
+                    <a href="{% url 'notes:login' %}" class="btn btn-primary">Go to notes</a>
+
+                   {% endif %}
+
+
+
+
+
+
                  </div>
                </div>
              </div>
@@ -146,7 +126,7 @@
                    <div class="col-md-3">
                     <div class="card shadow">
                       <div class="card-body">
-                      <div class="py-3 text-center"> <i class="fas fa-rocket card-img-top fa-4x text-primary" aria-hidden="true"></i></div>
+                      <div class="py-3 text-center"> <i class="fa fa-rocket card-img-top fa-4x text-primary" aria-hidden="true"></i></div>
                       <div class="card-body">
                         <h4 class="card-title">Ready to ship</h4>
                         <p class="card-text">You can use this theme as personal as well as for commercial purpose & can customise it. </p>
@@ -157,7 +137,9 @@
                       <div class="col-md-3">
                      <div class="card shadow">
                       <div class="card-body">
-                       <div class="py-3 text-center"><i class="fas fa-feather card-img-top fa-4x text-primary" aria-hidden="true"></i></div>
+                       <div class="py-3 text-center">
+                          <i class="fa fa-leaf card-img-top fa-4x text-primary" aria-hidden="true"></i>
+                        </div>
                       <div class="card-body">
                         <h4 class="card-title">Light weight</h4>
                         <p class="card-text">We avoid needless js and CSS which makes template more sleek and powerful. </p>
@@ -182,7 +164,9 @@
                     <div class="col-md-3">
                      <div class="card shadow">
                       <div class="card-body">
-                      <div class="py-3 text-center"><i class="fas fa-charging-station card-img-top fa-4x text-primary" aria-hidden="true"></i>
+                      <div class="py-3 text-center">
+                          <i class="fa fa-bolt card-img-top fa-4x text-primary" aria-hidden="true"></i>
+
                      </div>
                       <div class="card-body">
                         <h4 class="card-title">Easy customisation</h4>
@@ -196,6 +180,7 @@
                   </div>
                 </div>
               <div class="container mt-5  text-center">
+                  <i class="fa fa-feather card-img-top fa-4x text-primary" aria-hidden="true"></i>
                  <p class="pt-5 pb-2 h4 text-monospace">Speed up your development with high quality themes.</p>
                 <div class="row">
 
@@ -346,6 +331,7 @@
                 <!--end of container-->
             </footer>
 <!-- footer end -->
+{% endblock body %}
 
     </body>
 </html>

@@ -11,7 +11,7 @@ from django.contrib.auth import(
 
 
 class Note_form(forms.ModelForm):
-    title = forms.CharField(label='title', widget=forms.TextInput(attrs={'class':'form-control'}))
+    title = forms.CharField(label='title', widget=forms.TextInput(attrs={'class':'form-control'}), max_length=30)
 
     note = forms.CharField(label='note', widget=forms.Textarea(attrs={'class':'form-control'}))
     class Meta:
@@ -56,9 +56,9 @@ class UserRegisterForm(forms.Form):
 
 
 class edit_note_form(forms.ModelForm):
-    title = forms.CharField(label='title', widget=forms.TextInput(attrs={'class':'form-control'}))
+    title = forms.CharField(label='title', widget=forms.TextInput(attrs={'class':'form-control'}), max_length=30)
 
-    note = forms.CharField(label='note', widget=forms.TextInput(attrs={'class':'form-control'}))
+    note = forms.CharField(label='note', widget=forms.Textarea(attrs={'class':'form-control'}))
     class Meta:
         model = Note
         fields = ['title','note']
