@@ -4,6 +4,6 @@ from .views import CreateShortenedLink,RedirectLink
 app_name  = 'urlshortner'
 
 urlpatterns = [
-    path('urlshortner/', CreateShortenedLink.as_view() , name='shortner'),
+    path('', CreateShortenedLink.as_view() , name='shortner'),
     path('<str:attach>/', RedirectLink.as_view()),
 ]
